@@ -1,0 +1,11 @@
+﻿
+> replyr-ai@0.1.0 build
+> next build --turbopack
+
+   Ôû▓ Next.js 15.5.12 (Turbopack)
+   - Environments: .env.local
+
+   Creating an optimized production build ...
+ Ô£ô Finished writing to disk in 767ms
+ Ô£ô Compiled successfully in 10.1s
+   Linting and checking validity of types ...

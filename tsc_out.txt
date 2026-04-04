@@ -1,0 +1,2 @@
+﻿app/layout.tsx(20,7): error TS2322: Type '{ children: Element; afterSignInUrl: string; afterSignUpUrl: string; signInFallbackRedirectUrl: string; signUpFallbackRedirectUrl: string; }' is not assignable to type 'IntrinsicAttributes & Without<NextClerkProviderProps<Ui>, "__internal_invokeMiddlewareOnAuthStateChange">'.
+  Property 'afterSignInUrl' does not exist on type 'IntrinsicAttributes & Without<NextClerkProviderProps<Ui>, "__internal_invokeMiddlewareOnAuthStateChange">'. Did you mean 'afterSignOutUrl'?

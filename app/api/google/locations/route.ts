@@ -77,39 +77,46 @@ export async function GET() {
 
     const accountsData = await accountsRes.json();
 
-    if (!accountsRes.ok || !accountsData.accounts) {
-        return NextResponse.json({ error: accountsData.error?.message || "Sin cuentas de Google Business detectadas" }, { status: 400 });
-    }
+    // Sincronizar si hay cuentas de Google Business
+    if (accountsRes.ok && accountsData.accounts) {
+      for (const account of accountsData.accounts) {
+        const locsRes = await fetch(`https://mybusiness.googleapis.com/v4/${account.name}/locations`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+        const locsData = await locsRes.json();
 
-    const allLocations = [];
-
-    for (const account of accountsData.accounts) {
-      const locsRes = await fetch(`https://mybusiness.googleapis.com/v4/${account.name}/locations`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-      const locsData = await locsRes.json();
-
-      if (locsData.locations) {
-         // Insert each remote location into supabase to sync states 
-         for (const loc of locsData.locations) {
-           allLocations.push(loc);
-           const { error: upsertErr } = await supabaseServer
-             .from('locations')
-             .upsert({
-               user_id: userId,
-               google_location_id: loc.name,
-               name: loc.locationName || 'Ubicación sin nombre',
-               address: loc.address ? loc.address.addressLines?.join(', ') : null,
-             }, { onConflict: 'google_location_id' });
-             
-             if(upsertErr) console.error("Error sincronizando ubicación", upsertErr);
-         }
+        if (locsData.locations) {
+           // Insert each remote location into supabase to sync states 
+           for (const loc of locsData.locations) {
+             const { error: upsertErr } = await supabaseServer
+               .from('locations')
+               .upsert({
+                 user_id: userId,
+                 google_location_id: loc.name,
+                 name: loc.locationName || 'Ubicación sin nombre',
+                 address: loc.address ? loc.address.addressLines?.join(', ') : null,
+               }, { onConflict: 'google_location_id' });
+               
+               if(upsertErr) console.error("Error sincronizando ubicación", upsertErr);
+           }
+        }
       }
     }
 
-    return NextResponse.json({ locations: allLocations });
+    // Retorna las ubicaciones que existen localmente en la base de datos (Supabase)
+    const { data: localLocations, error: fetchError } = await supabaseServer
+      .from('locations')
+      .select('*')
+      .eq('user_id', userId);
+
+    if (fetchError) {
+      console.error("Error obteniendo ubicaciones de la base local:", fetchError);
+      return NextResponse.json({ error: "No se pudieron obtener las ubicaciones." }, { status: 500 });
+    }
+
+    return NextResponse.json({ locations: localLocations || [] });
 
   } catch (error) {
       console.error("Error en router de Ubicaciones Google Business:", error);
