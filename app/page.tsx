@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, Star, MessageSquareText, Zap, ShieldCheck, Menu, X } from "lucide-react";
+import { CheckCircle2, Star, MessageSquareText, Zap, ShieldCheck, Menu, X, ArrowDown } from "lucide-react";
 
 export default function LandingPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -72,11 +72,11 @@ export default function LandingPage() {
           </div>
           
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 max-w-4xl mx-auto leading-tight mb-6">
-            Tu próxima reseña negativa merece <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-slate-600">respuesta en minutos.</span>
+            Responde todas tus reseñas de Google en minutos, <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-slate-600">con IA y aprobación humana.</span>
           </h1>
           
           <p className="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed">
-            Conecta tu Google Business Profile en 2 clics. La IA genera una respuesta personalizada para cada reseña. Tú la apruebas con un clic.
+            Conecta tu Google Business Profile, recibe borradores personalizados para cada reseña y publícalos con un clic. Sin abrir Google todos los días.
           </p>
           
           <div className="flex flex-col items-center gap-3">
@@ -186,14 +186,14 @@ export default function LandingPage() {
                   <MessageSquareText className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-bold mb-3 text-slate-900">Reputación dañada</h3>
-                <p className="text-slate-600">Una reseña negativa sin respuesta pesa más que 10 positivas. El silencio se interpreta como indiferencia frente a quejas válidas.</p>
+                <p className="text-slate-600">Una reseña negativa sin respuesta puede alejar a futuros clientes antes de que te conozcan. El silencio se interpreta como indiferencia.</p>
               </div>
               <div className="bg-slate-50 p-8 rounded-2xl shadow-sm border border-slate-200">
                 <div className="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center mb-6">
                   <Star className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-bold mb-3 text-slate-900">Ranking en Google Maps</h3>
-                <p className="text-slate-600">Google premia a los negocios que responden reseñas activamente con mejor posicionamiento en SEO local. Sin respuestas, bajas posiciones.</p>
+                <p className="text-slate-600">Responder reseñas activamente mejora la confianza del cliente y refuerza tu presencia local en Google Maps.</p>
               </div>
               <div className="bg-slate-50 p-8 rounded-2xl shadow-sm border border-slate-200">
                 <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-6">
@@ -281,6 +281,87 @@ export default function LandingPage() {
           </div>
         </section>
 
+        {/* SECTION: Cómo suena tu marca */}
+        <section className="py-24 sm:py-32 bg-slate-50 border-b border-slate-200">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 mb-4">Respuestas que suenan a ti, no a una plantilla</h2>
+              <p className="text-lg text-slate-600">La IA adapta el tono según el tipo de negocio y el rating de cada reseña</p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm flex flex-col gap-4">
+                <div className="inline-block bg-slate-100 text-slate-700 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full self-start">🍽️ Restaurante</div>
+                <div>
+                  <div className="flex text-amber-400 mb-3">
+                    <Star className="w-4 h-4 fill-current"/><Star className="w-4 h-4 fill-current"/><Star className="w-4 h-4 fill-current"/><Star className="w-4 h-4 fill-current"/><Star className="w-4 h-4 fill-current"/>
+                  </div>
+                  <p className="text-slate-600 bg-slate-50 p-4 rounded-xl border-l-4 border-slate-300 italic text-sm">
+                    &quot;La pizza estaba increíble y el servicio fue muy rápido. ¡Volveremos!&quot;
+                  </p>
+                </div>
+                <div className="flex justify-center text-slate-400">
+                  <ArrowDown className="w-6 h-6" />
+                </div>
+                <div className="bg-blue-50 border border-blue-100 p-5 rounded-xl flex-1 flex flex-col gap-3">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-blue-600 bg-blue-100 px-2 py-0.5 rounded">Resplyr generó esta respuesta</span>
+                    <Zap className="w-3 h-3 text-blue-600" />
+                  </div>
+                  <p className="text-slate-800 text-sm leading-relaxed">
+                    &quot;¡Gracias Diego! Nos alegra mucho que hayas disfrutado la experiencia. Te esperamos pronto con más sabor y buena atención 🍕&quot;
+                  </p>
+                </div>
+              </div>
+              <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm flex flex-col gap-4">
+                <div className="inline-block bg-slate-100 text-slate-700 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full self-start">🩺 Clínica dental</div>
+                <div>
+                  <div className="flex text-amber-400 mb-3">
+                    <Star className="w-4 h-4 fill-current"/><Star className="w-4 h-4 fill-current"/><Star className="w-4 h-4 text-slate-200"/><Star className="w-4 h-4 text-slate-200"/><Star className="w-4 h-4 text-slate-200"/>
+                  </div>
+                  <p className="text-slate-600 bg-slate-50 p-4 rounded-xl border-l-4 border-slate-300 italic text-sm">
+                    &quot;Esperé 45 minutos y nadie me explicó el procedimiento.&quot;
+                  </p>
+                </div>
+                <div className="flex justify-center text-slate-400">
+                  <ArrowDown className="w-6 h-6" />
+                </div>
+                <div className="bg-blue-50 border border-blue-100 p-5 rounded-xl flex-1 flex flex-col gap-3">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-blue-600 bg-blue-100 px-2 py-0.5 rounded">Resplyr generó esta respuesta</span>
+                    <Zap className="w-3 h-3 text-blue-600" />
+                  </div>
+                  <p className="text-slate-800 text-sm leading-relaxed">
+                    &quot;Hola María, lamentamos mucho tu experiencia. Los tiempos de espera y la comunicación son aspectos que tomamos muy en serio. Te invitamos a contactarnos directamente para resolver tu situación.&quot;
+                  </p>
+                </div>
+              </div>
+              <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm flex flex-col gap-4">
+                <div className="inline-block bg-slate-100 text-slate-700 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full self-start">🔧 Taller mecánico</div>
+                <div>
+                  <div className="flex text-amber-400 mb-3">
+                    <Star className="w-4 h-4 fill-current"/><Star className="w-4 h-4 fill-current"/><Star className="w-4 h-4 fill-current"/><Star className="w-4 h-4 fill-current"/><Star className="w-4 h-4 text-slate-200"/>
+                  </div>
+                  <p className="text-slate-600 bg-slate-50 p-4 rounded-xl border-l-4 border-slate-300 italic text-sm">
+                    &quot;Buen trabajo con el carro, aunque el precio fue un poco alto.&quot;
+                  </p>
+                </div>
+                <div className="flex justify-center text-slate-400">
+                  <ArrowDown className="w-6 h-6" />
+                </div>
+                <div className="bg-blue-50 border border-blue-100 p-5 rounded-xl flex-1 flex flex-col gap-3">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-blue-600 bg-blue-100 px-2 py-0.5 rounded">Resplyr generó esta respuesta</span>
+                    <Zap className="w-3 h-3 text-blue-600" />
+                  </div>
+                  <p className="text-slate-800 text-sm leading-relaxed">
+                    &quot;Gracias Carlos por confiar en nosotros. Entendemos tu observación sobre el precio y siempre buscamos ser transparentes. ¡Quedamos a tu servicio!&quot;
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* BLOQUE 7: Precios */}
         <section id="precios" className="py-24 sm:py-32 bg-blue-50 border-b border-slate-200">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -292,12 +373,12 @@ export default function LandingPage() {
               
               {/* PLAN BÁSICO */}
               <div className="bg-slate-50 rounded-3xl shadow-sm border border-slate-200 overflow-hidden relative p-8 flex flex-col h-full">
-                <h3 className="text-2xl font-bold text-slate-900 mb-2">Plan Básico</h3>
+                <h3 className="text-2xl font-bold text-slate-900 mb-2">Plan Starter</h3>
                 <div className="flex items-baseline gap-2 mb-2">
                   <span className="text-5xl font-extrabold tracking-tight text-slate-900">$19</span>
                   <span className="text-slate-500 font-medium">USD / mes</span>
                 </div>
-                <p className="text-sm text-slate-600 mb-8 border-b border-slate-200 pb-8">Para freelancers y gestores de redes</p>
+                <p className="text-sm text-slate-600 mb-8 border-b border-slate-200 pb-8">Para negocios con 1 ubicación</p>
                 
                 <ul className="space-y-4 mb-8 flex-1">
                   <li className="flex items-start gap-3 text-slate-600">
@@ -331,12 +412,12 @@ export default function LandingPage() {
                 <div className="inline-block bg-blue-600 text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-6 relative self-start">
                   Más popular
                 </div>
-                <h3 className="text-2xl font-bold text-slate-900 mb-2">Plan Pro</h3>
+                <h3 className="text-2xl font-bold text-slate-900 mb-2">Plan Growth</h3>
                 <div className="flex items-baseline gap-2 mb-2">
                   <span className="text-5xl font-extrabold tracking-tight text-slate-900">$39</span>
                   <span className="text-slate-500 font-medium">USD / mes</span>
                 </div>
-                <p className="text-sm text-slate-600 mb-8 border-b border-slate-200 pb-8">Para pequeños negocios</p>
+                <p className="text-sm text-slate-600 mb-8 border-b border-slate-200 pb-8">Para negocios en expansión</p>
                 
                 <ul className="space-y-4 mb-8 flex-1">
                   <li className="flex items-start gap-3 text-slate-600">
@@ -366,12 +447,12 @@ export default function LandingPage() {
 
               {/* PLAN BUSINESS */}
               <div className="bg-slate-50 rounded-3xl shadow-sm border border-slate-200 overflow-hidden relative p-8 flex flex-col h-full">
-                <h3 className="text-2xl font-bold text-slate-900 mb-2">Plan Business</h3>
+                <h3 className="text-2xl font-bold text-slate-900 mb-2">Plan Multi-ubicación</h3>
                 <div className="flex items-baseline gap-2 mb-2">
                   <span className="text-5xl font-extrabold tracking-tight text-slate-900">$79</span>
                   <span className="text-slate-500 font-medium">USD / mes</span>
                 </div>
-                <p className="text-sm text-slate-600 mb-8 border-b border-slate-200 pb-8">Para negocios con múltiples sucursales</p>
+                <p className="text-sm text-slate-600 mb-8 border-b border-slate-200 pb-8">Para cadenas y franquicias</p>
                 
                 <ul className="space-y-4 mb-8 flex-1">
                   <li className="flex items-start gap-3 text-slate-600">
@@ -496,11 +577,11 @@ export default function LandingPage() {
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
               <div>
                 <h3 className="font-bold text-slate-900 mb-2">Solo lectura</h3>
-                <p className="text-sm text-slate-600">Pedimos únicamente el permiso de lectura de reseñas. No publicamos nada sin tu aprobación explícita.</p>
+                <p className="text-sm text-slate-600">La conexión es de solo lectura para sincronizar reseñas. La publicación de respuestas requiere tu aprobación explícita.</p>
               </div>
               <div>
                 <h3 className="font-bold text-slate-900 mb-2">OAuth oficial de Google</h3>
-                <p className="text-sm text-slate-600">Conexión encriptada directa con Google. Nunca vemos ni almacenamos tu contraseña, operamos con tokens asíncronos.</p>
+                <p className="text-sm text-slate-600">Conexión encriptada directa con Google. Nunca vemos ni almacenamos tu contraseña, operamos con tokens temporales y seguros.</p>
               </div>
               <div>
                 <h3 className="font-bold text-slate-900 mb-2">Sin entrenar modelos</h3>
@@ -520,24 +601,28 @@ export default function LandingPage() {
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 mb-12 text-center">Preguntas frecuentes</h2>
             <div className="space-y-8">
               <div className="bg-slate-50 p-6 rounded-2xl shadow-sm border border-slate-200">
-                <h4 className="font-bold text-lg text-slate-900 mb-2">¿Resplyr publica respuestas automáticamente?</h4>
-                <p className="text-slate-600">No por defecto. Sabemos lo delicado de hablar por el negocio; por eso cada respuesta pasa siempre por tu aprobación antes de enviarse a Maps.</p>
+                <h4 className="font-bold text-lg text-slate-900 mb-2">¿Qué tan buena es la respuesta si la reseña está en inglés o Spanglish?</h4>
+                <p className="text-slate-600">Resplyr detecta automáticamente el idioma y responde en el mismo. Si la reseña mezcla idiomas, responde en español.</p>
               </div>
               <div className="bg-slate-50 p-6 rounded-2xl shadow-sm border border-slate-200">
-                <h4 className="font-bold text-lg text-slate-900 mb-2">¿Necesito entregarles mi contraseña de Google?</h4>
-                <p className="text-slate-600">Nunca. La conexión se realiza de forma directa usando OAuth 2.0 oficial de Google (el mismo sistema seguro que usa Hootsuite o plataformas oficiales). Nosotros sólo recibimos un token codificado temporal.</p>
+                <h4 className="font-bold text-lg text-slate-900 mb-2">¿Puedo definir el tono por sucursal?</h4>
+                <p className="text-slate-600">Sí. Cada ubicación tiene su propio perfil de negocio. Un taller mecánico y una clínica reciben respuestas con tono diferente.</p>
               </div>
               <div className="bg-slate-50 p-6 rounded-2xl shadow-sm border border-slate-200">
-                <h4 className="font-bold text-lg text-slate-900 mb-2">¿Qué sucede cuando termina el trial de 7 días?</h4>
-                <p className="text-slate-600">Recibirás un email de cortesía un día antes. Al terminarse el trial, el panel dejará de sincronizar respuestas si no activas la suscripción, pero no facturamos nada a menos que lo autorices expresamente.</p>
+                <h4 className="font-bold text-lg text-slate-900 mb-2">¿Qué pasa si llega una reseña injusta o agresiva?</h4>
+                <p className="text-slate-600">La IA genera una respuesta profesional y calmada. Tú la revisas, la editas si quieres, y decides si publicarla o no.</p>
               </div>
               <div className="bg-slate-50 p-6 rounded-2xl shadow-sm border border-slate-200">
-                <h4 className="font-bold text-lg text-slate-900 mb-2">¿Funciona esto para cualquier nivel de negocio?</h4>
-                <p className="text-slate-600">Sí. Ya seas un restaurante local, un complejo de clínicas, una ferretería o abogado: si tu local está en Google Maps, Resplyr puede leer y responder con IA.</p>
+                <h4 className="font-bold text-lg text-slate-900 mb-2">¿Las respuestas son realmente ilimitadas?</h4>
+                <p className="text-slate-600">Sí, sin límite de uso razonable. Puedes responder todas las reseñas que recibas en tus ubicaciones incluidas.</p>
               </div>
               <div className="bg-slate-50 p-6 rounded-2xl shadow-sm border border-slate-200">
-                <h4 className="font-bold text-lg text-slate-900 mb-2">¿Puedo modificar la respuesta generada antes de dar OK?</h4>
-                <p className="text-slate-600">Siempre. Considera a la IA como un muy veloz primer borrador que te ahorra 5 minutos. Siempre puedes cambiar el estilo, agregar promociones puntuales o reformular gratis antes de publicar.</p>
+                <h4 className="font-bold text-lg text-slate-900 mb-2">¿Qué pasa cuando termina el trial de 7 días?</h4>
+                <p className="text-slate-600">Recibes un email de aviso el día anterior. Si no activas tu plan, el dashboard deja de sincronizar reseñas pero tus datos quedan guardados.</p>
+              </div>
+              <div className="bg-slate-50 p-6 rounded-2xl shadow-sm border border-slate-200">
+                <h4 className="font-bold text-lg text-slate-900 mb-2">¿Funciona para cualquier tipo de negocio en Latinoamérica?</h4>
+                <p className="text-slate-600">Sí. Cualquier negocio con Google Business Profile puede usar Resplyr: restaurantes, clínicas, talleres, salones, hoteles, tiendas y más.</p>
               </div>
             </div>
           </div>

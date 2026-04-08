@@ -3,10 +3,21 @@ import { auth } from '@clerk/nextjs/server';
 import { supabaseServer } from '@/lib/supabase-server';
 
 export async function POST(req: Request) {
-  const { userId } = await auth();
-  if (!userId) return NextResponse.json({ error: "No autorizado" }, { status: 401 });
+  const cronSecret = req.headers.get('x-cron-secret');
+  const isCronRequest = cronSecret && cronSecret === process.env.CRON_SECRET;
+  
+  const body = await req.json();
+  const reviewId = body.reviewId;
+  
+  let userId;
+  if (isCronRequest) {
+    userId = body.userId;
+  } else {
+    const session = await auth();
+    userId = session?.userId;
+  }
 
-  const { reviewId } = await req.json();
+  if (!userId) return NextResponse.json({ error: "No autorizado" }, { status: 401 });
   if (!reviewId) return NextResponse.json({ error: "reviewId es requerido" }, { status: 400 });
 
   const { data: review, error } = await supabaseServer
@@ -39,7 +50,13 @@ Reglas:
 - Si el rating es 4-5 estrellas: respuesta agradecida, breve (2-3 oraciones), menciona el nombre del reviewer
 - Si el rating es 3 estrellas: respuesta empática, reconoce la experiencia, invita a regresar
 - Si el rating es 1-2 estrellas: respuesta profesional, pide disculpas sin excusas, ofrece resolver el problema, incluye invitación a contacto directo
-- Idioma: español latinoamericano natural, no formal en exceso
+- IMPORTANTE sobre el idioma:
+  - Detecta el idioma en que está escrita la reseña
+  - Responde SIEMPRE en ese mismo idioma
+  - Si la reseña está en inglés, responde en inglés
+  - Si está en español, responde en español
+  - Si está en portugués, responde en portugués
+  - Si mezcla idiomas (Spanglish), responde en español
 - Longitud máxima: 100 palabras
 - No uses frases genéricas como "Estimado cliente" o "Gracias por su visita"
 - Siempre termina con una despedida cálida
