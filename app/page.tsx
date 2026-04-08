@@ -8,6 +8,7 @@ import { CheckCircle2, Star, MessageSquareText, Zap, ShieldCheck, Menu, X, Arrow
 
 export default function LandingPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isAnnual, setIsAnnual] = useState(true);
 
   return (
     <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-blue-600 selection:text-white flex flex-col">
@@ -365,8 +366,22 @@ export default function LandingPage() {
         {/* BLOQUE 7: Precios */}
         <section id="precios" className="py-24 sm:py-32 bg-blue-50 border-b border-slate-200">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="text-center max-w-2xl mx-auto mb-16">
+            <div className="text-center max-w-2xl mx-auto mb-10">
               <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 mb-4">Invierte menos de lo que pierdes por ignorar una reseña.</h2>
+            </div>
+            
+            <div className="flex justify-center items-center gap-4 mb-16">
+              <span className={`text-sm font-medium ${!isAnnual ? 'text-slate-900' : 'text-slate-500'}`}>Mensual</span>
+              <button 
+                onClick={() => setIsAnnual(!isAnnual)}
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none ${isAnnual ? 'bg-blue-600' : 'bg-slate-300'}`}
+              >
+                <span className={`${isAnnual ? 'translate-x-6' : 'translate-x-1'} inline-block h-4 w-4 transform rounded-full bg-white transition-transform`} />
+              </button>
+              <div className="flex items-center gap-2">
+                <span className={`text-sm font-medium ${isAnnual ? 'text-slate-900' : 'text-slate-500'}`}>Anual</span>
+                <span className="inline-block bg-green-100 text-green-700 text-xs font-bold px-2 py-0.5 rounded-full">Ahorra 15%</span>
+              </div>
             </div>
             
             <div className="grid md:grid-cols-3 gap-8">
@@ -375,7 +390,7 @@ export default function LandingPage() {
               <div className="bg-slate-50 rounded-3xl shadow-sm border border-slate-200 overflow-hidden relative p-8 flex flex-col h-full">
                 <h3 className="text-2xl font-bold text-slate-900 mb-2">Plan Starter</h3>
                 <div className="flex items-baseline gap-2 mb-2">
-                  <span className="text-5xl font-extrabold tracking-tight text-slate-900">$19</span>
+                  <span className="text-5xl font-extrabold tracking-tight text-slate-900">${isAnnual ? '16' : '19'}</span>
                   <span className="text-slate-500 font-medium">USD / mes</span>
                 </div>
                 <p className="text-sm text-slate-600 mb-8 border-b border-slate-200 pb-8">Para negocios con 1 ubicación</p>
@@ -414,7 +429,7 @@ export default function LandingPage() {
                 </div>
                 <h3 className="text-2xl font-bold text-slate-900 mb-2">Plan Growth</h3>
                 <div className="flex items-baseline gap-2 mb-2">
-                  <span className="text-5xl font-extrabold tracking-tight text-slate-900">$39</span>
+                  <span className="text-5xl font-extrabold tracking-tight text-slate-900">${isAnnual ? '33' : '39'}</span>
                   <span className="text-slate-500 font-medium">USD / mes</span>
                 </div>
                 <p className="text-sm text-slate-600 mb-8 border-b border-slate-200 pb-8">Para negocios en expansión</p>
@@ -426,7 +441,7 @@ export default function LandingPage() {
                   </li>
                   <li className="flex items-start gap-3 text-slate-600">
                     <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0" />
-                    <span>Todo lo del plan Básico</span>
+                    <span>Todo lo del plan Starter</span>
                   </li>
                   <li className="flex items-start gap-3 text-slate-600">
                     <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0" />
@@ -449,7 +464,7 @@ export default function LandingPage() {
               <div className="bg-slate-50 rounded-3xl shadow-sm border border-slate-200 overflow-hidden relative p-8 flex flex-col h-full">
                 <h3 className="text-2xl font-bold text-slate-900 mb-2">Plan Multi-ubicación</h3>
                 <div className="flex items-baseline gap-2 mb-2">
-                  <span className="text-5xl font-extrabold tracking-tight text-slate-900">$79</span>
+                  <span className="text-5xl font-extrabold tracking-tight text-slate-900">${isAnnual ? '67' : '79'}</span>
                   <span className="text-slate-500 font-medium">USD / mes</span>
                 </div>
                 <p className="text-sm text-slate-600 mb-8 border-b border-slate-200 pb-8">Para cadenas y franquicias</p>
@@ -461,7 +476,7 @@ export default function LandingPage() {
                   </li>
                   <li className="flex items-start gap-3 text-slate-600">
                     <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0" />
-                    <span>Todo lo del plan Pro</span>
+                    <span>Todo lo del plan Growth</span>
                   </li>
                   <li className="flex items-start gap-3 text-slate-600">
                     <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0" />
