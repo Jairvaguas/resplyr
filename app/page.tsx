@@ -414,7 +414,7 @@ export default function LandingPage() {
                   </li>
                 </ul>
                 
-                <Link href="/sign-up" className="block w-full mt-auto">
+                <Link href={`/sign-up?plan=starter&cycle=${isAnnual ? 'annual' : 'monthly'}`} className="block w-full mt-auto">
                   <Button size="lg" variant="outline" className="w-full text-base h-12 rounded-xl text-blue-600 border-blue-600 hover:bg-blue-50 transition-all">
                     Iniciar prueba gratis
                   </Button>
@@ -453,7 +453,7 @@ export default function LandingPage() {
                   </li>
                 </ul>
                 
-                <Link href="/sign-up" className="block w-full mt-auto">
+                <Link href={`/sign-up?plan=growth&cycle=${isAnnual ? 'annual' : 'monthly'}`} className="block w-full mt-auto">
                   <Button size="lg" className="w-full text-base h-12 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition-all">
                     Iniciar prueba gratis
                   </Button>
@@ -488,7 +488,7 @@ export default function LandingPage() {
                   </li>
                 </ul>
                 
-                <Link href="/sign-up" className="block w-full mt-auto">
+                <Link href={`/sign-up?plan=business&cycle=${isAnnual ? 'annual' : 'monthly'}`} className="block w-full mt-auto">
                   <Button size="lg" variant="outline" className="w-full text-base h-12 rounded-xl text-blue-600 border-blue-600 hover:bg-blue-50 transition-all">
                     Iniciar prueba gratis
                   </Button>

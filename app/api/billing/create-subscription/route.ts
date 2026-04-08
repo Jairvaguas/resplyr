@@ -11,28 +11,35 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "No autorizado" }, { status: 401 });
   }
 
-  let plan = 'pro';
+  let plan = 'growth';
+  let billing_cycle = 'monthly';
   try {
     const body = await req.json();
     if (body && body.plan) plan = body.plan;
+    if (body && body.billing_cycle) billing_cycle = body.billing_cycle;
   } catch (err) {
-    // Si no se envía JSON, default a pro
+    // Si no se envía JSON, default
   }
 
-  let transaction_amount = 39;
-  let reason = "Resplyr Plan Pro";
+  const prices = {
+    monthly: { starter: 19, growth: 39, business: 79 },
+    annual: { starter: 192, annual_growth: 396, business: 804 }
+  };
 
-  if (plan === 'basic') {
-    transaction_amount = 19;
-    reason = "Resplyr Plan Básico";
-  } else if (plan === 'business') {
-    transaction_amount = 79;
-    reason = "Resplyr Plan Business";
+  let transaction_amount;
+  if (billing_cycle === 'annual') {
+    if (plan === 'starter') transaction_amount = prices.annual.starter;
+    else if (plan === 'business') transaction_amount = prices.annual.business;
+    else transaction_amount = prices.annual.annual_growth;
   } else {
-    // defaults just in case
-    transaction_amount = 39;
-    reason = "Resplyr Plan Pro";
+    if (plan === 'starter') transaction_amount = prices.monthly.starter;
+    else if (plan === 'business') transaction_amount = prices.monthly.business;
+    else transaction_amount = prices.monthly.growth;
   }
+
+  const cycleSuffix = billing_cycle === 'annual' ? 'Anual' : 'Mensual';
+  const planName = plan === 'starter' ? 'Starter' : plan === 'business' ? 'Multi-ubicación' : 'Growth';
+  const reason = `Resplyr Plan ${planName} - ${cycleSuffix}`;
 
   const MP_ACCESS_TOKEN = process.env.MP_ACCESS_TOKEN;
   const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
@@ -53,7 +60,7 @@ export async function POST(req: Request) {
         reason: reason,
         auto_recurring: {
           frequency: 1,
-          frequency_type: "months",
+          frequency_type: billing_cycle === 'annual' ? "years" : "months",
           transaction_amount: transaction_amount,
           currency_id: "USD"
         },
